@@ -4,26 +4,24 @@ Last checked/updated: 2026-06-21
 
 ## Executive summary
 
-The active design is now R5: a Teensy 4.1 CAN/LIN automotive interface using an OBD2 pigtail/cable solder-pad entry and DIP-switch configurable routing.
+The active design is now R6: a Teensy 4.1 dual-CAN + LIN/K automotive interface using OBD2 pigtail/cable solder pads and DIP-switch configurable routing.
 
-R5 is the first PCB fabrication candidate in this project because it removes the previous unknown board-mounted OBD connector footprint risk.
+R6 supersedes R5.
+
+Reason: R5 was DRC-clean and manufacturable as a PCB, but the procurement audit found it lacked the required external LM2596 buck-regulator support parts. R6 adds those parts and updates the transceiver selections for Teensy 4.1 3.3 V logic compatibility.
 
 Authoritative routed board:
 
-- `teensy-41-can-lin-r5-pigtail-dipswitch-routed.kicad_pcb`
+- `teensy-41-can-lin-r6-complete-power-routed.kicad_pcb`
 
 Preferred fabrication ZIP:
 
-- `r5_pigtail_dipswitch_fabrication_minimal_gerbers.zip`
+- `r6_complete_power_fabrication_minimal_gerbers.zip`
 
-Full KiCad layer export ZIP, kept for reference:
+Main R6 documentation:
 
-- `r5_pigtail_dipswitch_fabrication_gerbers.zip`
-
-Main R5 documentation:
-
-- `R5_PIGTAIL_DIPSWITCH_MANUFACTURING.md`
-- `BOM_R5_PIGTAIL_DIPSWITCH.csv`
+- `R6_PROCUREMENT_BOM_EU.md`
+- `BOM_R6_PROCUREMENT_EU.csv`
 
 ## KiCad verification
 
@@ -35,7 +33,7 @@ Verified with:
 
 Latest authoritative DRC report:
 
-- `reports/teensy-41-can-lin-r5-pigtail-dipswitch-routed-drc.rpt`
+- `reports/teensy-41-can-lin-r6-complete-power-routed-drc.rpt`
 
 Result:
 
@@ -45,20 +43,18 @@ Result:
 
 Generated fabrication files:
 
-- `gerbers/r5_pigtail_dipswitch_fabrication/`
-- `r5_pigtail_dipswitch_fabrication_gerbers.zip`
+- `gerbers/r6_complete_power_fabrication_minimal/`
+- `r6_complete_power_fabrication_minimal_gerbers.zip`
 
 Generated preview files:
 
-- `previews/r5_pigtail_dipswitch_svg/`
+- `previews/r6_complete_power_svg/`
 
-## R5 feature summary
+## R6 feature summary
 
 ### Mechanical form
 
-R5 uses an OBD2 cable/pigtail instead of a board-mounted OBD connector.
-
-This avoids the previous blocker where no reliable datasheet/mechanical drawing existed for the board-mounted OBD connector.
+R6 uses an OBD2 cable/pigtail instead of a board-mounted OBD connector.
 
 The user should:
 
@@ -69,8 +65,6 @@ The user should:
 
 ### Teensy 4.1
 
-The R5 Teensy footprint/pin assignment was audited against PJRC Teensy 4.1 information.
-
 Key assignments:
 
 - CAN A / CAN1: Teensy pins 22 TX and 23 RX
@@ -78,10 +72,27 @@ Key assignments:
 - LIN/K UART: Teensy pins 8 TX and 7 RX
 - CAN standby/control: pins 5 and 4
 - LIN enable/control: pin 6
+- Teensy +3.3 V is used for CAN VIO and LIN RX pull-up logic compatibility
+
+### Communication ICs
+
+- CAN A/B: MCP2562FD-E/SN, SOIC-8, VIO pin connected to +3.3 V.
+- LIN/K: TLIN1029DRQ1, SOIC-8, RXD open-drain pulled up to +3.3 V through R1.
+
+### Power section
+
+R6 includes the complete LM2596S-5.0 fixed 5 V buck-regulator support circuit:
+
+- F1: 500 mA resettable fuse
+- D1: SMBJ24CA input TVS
+- U5: LM2596S-5.0 fixed 5 V buck regulator
+- L1: 33 uH buck inductor
+- D2: Schottky catch diode
+- C1/C3: input/output electrolytic bulk capacitors
+- C2/C4: input/output ceramic decoupling capacitors
+- C5/C6/C7: CAN/LIN IC local decoupling capacitors
 
 ### DIP switches
-
-R5 uses two 8-position DIP switches.
 
 SW1 configures CAN routing:
 
@@ -105,24 +116,39 @@ Rule: enable exactly one LIN/K source at a time.
 
 ## Manufacturing status
 
-PCB fabrication status: ready to upload as a fabrication candidate.
+PCB fabrication status: ready to upload as a first-run fabrication candidate.
 
 Use:
 
-- `r5_pigtail_dipswitch_fabrication_gerbers.zip`
+- `r6_complete_power_fabrication_minimal_gerbers.zip`
 
-Remaining practical checks before ordering/assembling:
+Recommended order settings:
 
-1. Confirm desired PCB fab settings: 2-layer FR4, 1.6 mm, 1 oz copper.
-2. Confirm the exact DIP switch, transceiver, regulator, TVS, fuse, and header parts to buy.
-3. Confirm the OBD2 pigtail cable pinout with a multimeter before soldering.
-4. Perform bench power testing before installing Teensy or connecting to a car.
+- 2-layer FR4
+- 1.6 mm thickness
+- 1 oz copper
+- HASL lead-free or ENIG
+- Small prototype quantity first, e.g. 5 boards
+
+Remaining practical checks before vehicle use:
+
+1. Confirm exact OBD2 pigtail/cable pinout with a multimeter.
+2. Assemble and test the power section on a current-limited bench supply.
+3. Verify +5 V before installing the Teensy.
+4. Confirm DIP switch settings.
+5. Start with read-only/silent CAN firmware.
 
 ## Previous revisions
+
+R5:
+
+- `teensy-41-can-lin-r5-pigtail-dipswitch-routed.kicad_pcb`
+- Introduced the safer OBD2 pigtail/DIP-switch mechanical concept.
+- Superseded by R6 because it lacked required LM2596 support components and procurement-ready IC choices.
 
 R4:
 
 - `teensy-41-can-lin-r4-universal-routing-matrix.kicad_pcb`
 - Implemented CAN/LIN routing matrix, but still used a board-mounted OBD connector approach.
 
-R5 supersedes R4 for fabrication because R5 avoids the uncertain OBD connector footprint and uses easier DIP switch configuration.
+R6 supersedes R4/R5 for ordering and procurement.
