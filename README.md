@@ -82,7 +82,7 @@ Before connecting to a vehicle:
 
 ## Disclaimer
 
-I do not have experience in PCB design/manufacturing nor in complex electronics.
-This entire project was designed by AI, with me steering it to the goals.
-I am always learning and I welcome constructive feedback.
+I do not have experience in PCB design/manufacturing nor in complex electronics.\
+This entire project was designed by AI, with me steering it to the goals.\
+I am always learning and I welcome constructive feedback.\
 Treat this as a prototype and make some checks!
