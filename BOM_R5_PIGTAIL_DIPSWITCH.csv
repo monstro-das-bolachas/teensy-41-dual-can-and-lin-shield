@@ -1,0 +1,25 @@
+Reference,Quantity,Value / Part,Footprint,Notes
+U1,1,Teensy 4.1 module,Project local Teensy_4.1_MainHeaders_PJRC_Audited,Install using 2.54 mm headers/socket strips; USB accessible from Teensy itself
+U2,1,TJA1051 CAN transceiver SOIC-8,SOIC-8_3.9x4.9mm_P1.27mm,CAN A transceiver; verify exact variant supply/standby behavior before assembly
+U3,1,TJA1051 CAN transceiver SOIC-8,SOIC-8_3.9x4.9mm_P1.27mm,CAN B transceiver; verify exact variant supply/standby behavior before assembly
+U4,1,TJA1021 LIN transceiver SOIC-8,SOIC-8_3.9x4.9mm_P1.27mm,LIN/K transceiver candidate; K-Line protocol compatibility should be firmware/bench tested
+U5,1,LM2596S-5 buck regulator,TO-263-5_TabPin3,5 V regulator footprint; verify BOM/package/pinout for exact purchased part
+SW1,1,8-position SPST DIP switch,SW_DIP_SPSTx08_Slide_9.78x22.5mm_W7.62mm_P2.54mm,CAN normal/cross selector
+SW2,1,8-position SPST DIP switch,SW_DIP_SPSTx08_Slide_9.78x22.5mm_W7.62mm_P2.54mm,LIN/K source selector; select one only
+J1,1,OBD2 pigtail solder pads,Project local OBD2_PigtailPads_Manufacturing,Solder OBD male cable wires directly; use strain relief holes
+J2,1,1x8 2.54 mm header,PinHeader_1x08_P2.54mm_Vertical,Auxiliary CAN/LIN/power header
+F1,1,500 mA resettable polyfuse,Fuse_1206_3216Metric,Automotive 12 V input protection
+D1,1,SMBJ24CA or similar automotive TVS,D_SMA,12 V transient clamp; verify standoff/clamp rating
+TP1,1,12 V test pad,TestPoint_Pad_D1.5mm,Test point
+TP2,1,5 V test pad,TestPoint_Pad_D1.5mm,Test point
+TP3,1,GND test pad,TestPoint_Pad_D1.5mm,Test point
+TP4,1,CAN_A_H test pad,TestPoint_Pad_D1.5mm,Test point
+TP5,1,CAN_A_L test pad,TestPoint_Pad_D1.5mm,Test point
+TP6,1,CAN_B_H test pad,TestPoint_Pad_D1.5mm,Test point
+TP7,1,CAN_B_L test pad,TestPoint_Pad_D1.5mm,Test point
+TP8,1,LIN_BUS test pad,TestPoint_Pad_D1.5mm,Test point
+TP9,1,AUX_LIN_K_IO test pad,TestPoint_Pad_D1.5mm,Test point
+MH1-MH4,4,M3 mounting holes,MountingHole_3.2mm_M3,Board mounting
+SR1-SR2,2,Cable strain relief holes,MountingHole_3.2mm_M3,Use zip tie around OBD cable
+OBD cable,1,OBD2 male pigtail cable or connector with wires,Off-board part,Example approach: RS-style automotive OBD connector/cable; verify each wire with multimeter
+Headers/socket,1 set,2.54 mm female/male headers for Teensy,Off-board part,Choose socketing method before assembly

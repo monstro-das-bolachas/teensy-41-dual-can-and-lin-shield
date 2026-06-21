@@ -1,0 +1,25 @@
+# KiCad project/design files are source artifacts in this repository.
+# Keep transient backup files out, but track .kicad_pcb/.kicad_sch/.kicad_pro/.kicad_prl.
+*.kicad_prl-bak
+*.kicad_pcb-bak
+*.kicad_sch-bak
+
+# Build directories
+build/
+dist/
+.output/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VS Code
+.vscode/
+
+# Other files
+.DS_Store
+*.swp
+*.swo
+*~
