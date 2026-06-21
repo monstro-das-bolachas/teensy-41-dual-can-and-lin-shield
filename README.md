@@ -1,12 +1,14 @@
 # Teensy 4.1 CAN/LIN Interface for automotive diagnostics
 
-This project contains a Teensy 4.1 based dual-CAN + LIN/K automotive interface for Mercedes S203/W203 learning and broader EU-market diagnostic/reverse-engineering use.
+This project contains a Teensy 4.1 based dual-CAN + LIN/K automotive interface for diagnostic/reverse-engineering use.
 
 ## Current active revision
 
 Use R6.
 
 R6 supersedes R5. R5 was a DRC-clean pigtail/DIP-switch layout, but the procurement audit found that it did not include the required external components for the LM2596 buck regulator. R6 adds the missing power-supply and decoupling components and updates the transceiver choices for Teensy 4.1 3.3 V logic.
+
+R5 was the first revision publicly shared; R6 is the recommended ordering/procurement candidate.
 
 Start here:
 
@@ -87,6 +89,8 @@ Before connecting to a vehicle:
 5. Start with passive/read-only firmware.
 6. Do not enable termination or transmit frames unless intentionally testing.
 
-## Prototype warning
+## Prototype warning / disclaimer
 
 R6 is the current manufacturing/procurement candidate, but it is still first-run hardware. Order a small PCB batch first, bench-test carefully, and do not connect to a car until all power and wiring checks pass.
+
+The project was AI-assisted and should be treated as a prototype. Independent review and constructive feedback are welcome.
