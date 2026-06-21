@@ -1,12 +1,10 @@
 # Teensy 4.1 CAN/LIN Interface for automotive diagnostics
 
-This project contains a Teensy 4.1 based dual-CAN + LIN/K automotive interface for Mercedes S203/W203 learning and broader EU-market diagnostic/reverse-engineering use.
+This project contains a Teensy 4.1 based dual-CAN + LIN/K automotive interface for diagnostic/reverse-engineering use.
 
 ## Current active revision
 
-Use R5.
-
-R5 replaces the risky board-mounted OBD connector footprint with OBD2 pigtail/cable solder pads and uses DIP switches for CAN/LIN/K routing selection.
+This is the fifth revision but the first to be publicly shared.
 
 Start here:
 
@@ -82,6 +80,9 @@ Before connecting to a vehicle:
 4. Start with passive/read-only firmware.
 5. Do not enable termination or transmit frames unless intentionally testing.
 
-## Repository note
+## Disclaimer
 
-This directory is ready to become a GitHub repository once the remote URL and authentication method are provided.
+I do not have experience in PCB design/manufacturing nor in complex electronics.
+This entire project was designed by AI, with me steering it to the goals.
+I am always learning and I welcome constructive feedback.
+Treat this as a prototype and make some checks!
