@@ -36,3 +36,6 @@ __pycache__/
 *.cmd
 *.js
 *.ts
+
+# Local KiCad working directories
+**/work/

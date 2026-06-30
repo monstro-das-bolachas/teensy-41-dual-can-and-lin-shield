@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "teensy-41-can-lin")(type "KiCad")(uri "${KIPRJMOD}/teensy-41-can-lin.pretty")(options "")(descr "Local project footprints for Teensy CAN/LIN interface"))
+)

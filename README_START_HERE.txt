@@ -2,25 +2,29 @@ Teensy 4.1 CAN/LIN interface project - cleaned layout
 
 START HERE - IMPORTANT SAFETY STATUS
 
-R10 is NOT FOR FAB. Do not order R10. Do not upload the R10 JLCPCB Gerber ZIP to JLCPCB.
+R11 is the current prototype manufacturing candidate.
 
-1. Active current revision for inspection/review:
-   revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/
+You may order a small bare-PCB prototype batch from JLCPCB/PCBWay for bench bring-up only. Do not connect an assembled board directly to a vehicle until continuity, power, pin-map, DIP-switch, and fused OBD bench checks pass.
 
-2. Active KiCad PCB-only inspection board:
-   revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/kicad/teensy-41-true-dual-canfd-lin-r10.kicad_pcb
+1. Current R11 working revision:
+   revisions/00_WORK_R11_TRUE_DUAL_CANFD/
 
-3. Main blocker/review document:
-   revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/docs/R10_EXTERNAL_REVIEW_FINDINGS_20260630.md
+2. Clean R11 release package:
+   revisions/00_WORK_R11_TRUE_DUAL_CANFD/release/R11_PROTOTYPE_MANUFACTURING_CANDIDATE_20260630/
 
-4. Existing R10 package ZIPs:
-   Retained for inspection/archive only. Do not use for board ordering.
+3. JLCPCB/PCBWay upload ZIP:
+   revisions/00_WORK_R11_TRUE_DUAL_CANFD/release/R11_PROTOTYPE_MANUFACTURING_CANDIDATE_20260630/package/JLCPCB_PCBWAY_UPLOAD_R11_MINIMAL_GERBERS_ONLY_20260630.zip
 
-5. Previous R9/classic-CAN archive:
-   revisions/01_R9_CLASSIC_CAN_ARCHIVE/
+4. Active KiCad board:
+   revisions/00_WORK_R11_TRUE_DUAL_CANFD/kicad/teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH.kicad_pcb
 
-Important status:
-- R10 has the correct true dual CAN FD architecture using MCP2518FD controllers.
-- R10 lacks an authoritative schematic/ERC and has unresolved power/layout/protection/default-state blockers.
-- R9 is retained only as historical/classic-CAN archive material.
-- Next orderable target should be R10A/R11 after fixes and schematic-driven verification.
+5. Verification status:
+   - KiCad CLI DRC: 0 DRC violations
+   - Known residual: one GND zone-to-zone unconnected report, visually confirmed as connected in KiCad
+   - Gerbers/drill: exported successfully
+
+6. Previous revisions:
+   - R10 remains NOT FOR FAB / archive after review.
+   - R9 remains historical/classic-CAN archive material only.
+
+Read CURRENT_STATUS.md before ordering or assembling.
