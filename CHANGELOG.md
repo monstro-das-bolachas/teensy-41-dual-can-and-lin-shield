@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-06-30 — R10 status correction: NOT FOR FAB
+
+- Reclassified R10 as an inspection/review revision only after external review.
+- Confirmed R10 architecture is correct for true dual CAN FD, but not orderable.
+- Added `R10_EXTERNAL_REVIEW_FINDINGS_20260630.md` with blockers for R10A/R11.
+- Updated README/status files to warn not to send the R10 JLCPCB Gerber ZIP to fabrication.
+
+
 ## R10 true dual CAN FD active release - 2026-06-30
 
 ### Status

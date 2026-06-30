@@ -4,7 +4,9 @@ Last checked/updated: 2026-06-30
 
 ## Executive summary
 
-The active hardware revision is now **R10 true dual CAN FD + LIN/K**.
+The active hardware revision is **R10 true dual CAN FD + LIN/K**, but R10 is **NOT FOR FAB**.
+
+Do not order R10. Do not send the R10 JLCPCB Gerber ZIP to a board house.
 
 R10 includes the required external CAN FD controller architecture:
 
@@ -15,7 +17,7 @@ Teensy 4.1 SPI bus
 TLIN1029 LIN/K interface retained
 ```
 
-The previous R9 hardware is archived as a classic CAN 2.0 + LIN/K reference design. R9 used CAN-FD-capable MCP2562FD physical transceivers, but did not include MCP2518FD or another CAN FD controller/MAC, so it is not true CAN FD.
+That fixes the previous R8/R9 architecture problem. The remaining blockers are schematic discipline, ERC, LIN/CAN safe defaults, buck/power layout, decoupling, crystal placement, ESD protection, USB/VIN isolation, and safer selector UX.
 
 ## Active R10 files
 
@@ -23,21 +25,16 @@ Active revision folder:
 
 - `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/`
 
-KiCad source:
+KiCad PCB-only inspection source:
 
 - `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/kicad/teensy-41-true-dual-canfd-lin-r10.kicad_pcb`
 - `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/kicad/teensy-41-true-dual-canfd-lin-r10.kicad_pro`
 
-Project-local support:
-
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/kicad/fp-lib-table`
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/kicad/sym-lib-table`
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/kicad/teensy-41-can-lin.pretty/`
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/kicad/teensy-r10-canfd.kicad_sym`
+There is currently no authoritative `.kicad_sch`; therefore there is no meaningful ERC and no schematic-driven BOM/netlist authority.
 
 ## R10 verification
 
-KiCad CLI 10.0.3 DRC was run from the cleaned active revision folder.
+KiCad CLI DRC was run from the cleaned active revision folder.
 
 Report:
 
@@ -49,19 +46,30 @@ Result:
 - Unconnected pads/items: 0
 - Footprint errors: 0
 
-Manufacturing export was regenerated from the cleaned active folder.
+This is a geometry/routing check only. It does not override the external review blockers.
 
-JLCPCB/root-upload package:
+## R10 blockers
 
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/package/R10_TRUE_DUAL_CANFD_JLCPCB_GERBERS.zip`
+See:
 
-Full source/handoff package:
+- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/docs/R10_EXTERNAL_REVIEW_FINDINGS_20260630.md`
 
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/package/R10_TRUE_DUAL_CANFD_FULL_PACKAGE.zip`
+Minimum R10A/R11 work:
 
-Checksums:
-
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/package/R10_TRUE_DUAL_CANFD_SHA256.txt`
+1. Create real `.kicad_sch` and run ERC.
+2. Fix TLIN1029 VSUP decoupling.
+3. Add LIN commander pull-up option.
+4. Add LIN_EN pull-down.
+5. Add CAN STBY/XSTBY pull-ups.
+6. Add MCP2518FD nCS pull-ups.
+7. Connect LM2596 thermal tab to GND.
+8. Redo buck/power routing and add GND pours.
+9. Move decoupling capacitors local to ICs.
+10. Move MCP2518FD crystals/load caps close to controllers and finalize load capacitance.
+11. Add CAN/LIN/K ESD protection.
+12. Resolve USB/VIN isolation.
+13. Improve DIP-switch safety/truth-table documentation.
+14. Regenerate BOM, ERC, DRC, Gerbers, drill files, and final package.
 
 ## R9 status
 
@@ -69,22 +77,4 @@ R9 is archived here:
 
 - `revisions/01_R9_CLASSIC_CAN_ARCHIVE/`
 
-R9 remains useful only as historical/reference material for:
-
-- power-section validation;
-- OBD pigtail solder-pad mechanics;
-- DIP switch ergonomics;
-- LIN/K source selection testing;
-- classic CAN 2.0 experimentation.
-
-R9 should not be ordered or presented as the final true dual CAN FD interface.
-
-## Required real-world checks before any vehicle connection
-
-1. Verify OBD2 pigtail pinout with a multimeter before soldering.
-2. Bench-test the power section with current limiting.
-3. Verify +5 V before installing the Teensy.
-4. Confirm DIP-switch settings.
-5. Start with passive/read-only firmware.
-6. Do not transmit vehicle frames until bench and passive capture tests pass.
-7. Confirm Teensy header orientation, pigtail pad mapping, and assembly-side choices before PCB order.
+R9 remains historical/reference material only and should not be presented as true dual CAN FD.

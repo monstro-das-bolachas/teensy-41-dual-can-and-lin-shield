@@ -1,28 +1,26 @@
 Teensy 4.1 CAN/LIN interface project - cleaned layout
 
-Start here:
+START HERE - IMPORTANT SAFETY STATUS
 
-1. Active current revision:
+R10 is NOT FOR FAB. Do not order R10. Do not upload the R10 JLCPCB Gerber ZIP to JLCPCB.
+
+1. Active current revision for inspection/review:
    revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/
 
-2. Active KiCad board:
+2. Active KiCad PCB-only inspection board:
    revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/kicad/teensy-41-true-dual-canfd-lin-r10.kicad_pcb
 
-3. Active JLCPCB Gerber upload ZIP:
-   revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/package/R10_TRUE_DUAL_CANFD_JLCPCB_GERBERS.zip
+3. Main blocker/review document:
+   revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/docs/R10_EXTERNAL_REVIEW_FINDINGS_20260630.md
 
-4. Active full handoff/source package:
-   revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/package/R10_TRUE_DUAL_CANFD_FULL_PACKAGE.zip
+4. Existing R10 package ZIPs:
+   Retained for inspection/archive only. Do not use for board ordering.
 
 5. Previous R9/classic-CAN archive:
    revisions/01_R9_CLASSIC_CAN_ARCHIVE/
 
-6. Cleanup manifests:
-   99_MANIFESTS/cleanup_manifest_before_reorg_20260630.json
-   99_MANIFESTS/cleanup_actions_20260630.json
-
 Important status:
-- R10 is the current true dual CAN FD architecture using MCP2518FD controllers.
+- R10 has the correct true dual CAN FD architecture using MCP2518FD controllers.
+- R10 lacks an authoritative schematic/ERC and has unresolved power/layout/protection/default-state blockers.
 - R9 is retained only as historical/classic-CAN archive material.
-- Test, draft, failed optimization, intermediate DRC, FreeRouting scratch, and invalid R10 working files were removed from the root project after preserving the active R10 and R9 archive artifacts.
-- KiCad DRC must be checked from the active revision folder before ordering.
+- Next orderable target should be R10A/R11 after fixes and schematic-driven verification.
