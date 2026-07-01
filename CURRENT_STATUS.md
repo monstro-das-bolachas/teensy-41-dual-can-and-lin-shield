@@ -4,77 +4,74 @@ Last checked/updated: 2026-06-30
 
 ## Executive summary
 
-The active hardware revision is **R10 true dual CAN FD + LIN/K**, but R10 is **NOT FOR FAB**.
+The active hardware revision is now **R11 true dual CAN FD + LIN/K prototype manufacturing candidate**.
 
-Do not order R10. Do not send the R10 JLCPCB Gerber ZIP to a board house.
+R11 may be ordered as a small bare-PCB prototype batch for bench bring-up. It is **not approved for direct vehicle testing** until assembled boards pass continuity, power, pin-map, and fused OBD bench checks.
 
-R10 includes the required external CAN FD controller architecture:
+## Active R11 files
 
-```text
-Teensy 4.1 SPI bus
-  -> MCP2518FD controller A -> MCP2562FD transceiver A
-  -> MCP2518FD controller B -> MCP2562FD transceiver B
-TLIN1029 LIN/K interface retained
-```
+Active working revision folder:
 
-That fixes the previous R8/R9 architecture problem. The remaining blockers are schematic discipline, ERC, LIN/CAN safe defaults, buck/power layout, decoupling, crystal placement, ESD protection, USB/VIN isolation, and safer selector UX.
+- `revisions/00_WORK_R11_TRUE_DUAL_CANFD/`
 
-## Active R10 files
+Clean release package folder:
 
-Active revision folder:
+- `revisions/00_WORK_R11_TRUE_DUAL_CANFD/release/R11_PROTOTYPE_MANUFACTURING_CANDIDATE_20260630/`
 
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/`
+Active KiCad source:
 
-KiCad PCB-only inspection source:
+- `revisions/00_WORK_R11_TRUE_DUAL_CANFD/kicad/teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH.kicad_pcb`
+- `revisions/00_WORK_R11_TRUE_DUAL_CANFD/kicad/teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH.kicad_pro`
 
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/kicad/teensy-41-true-dual-canfd-lin-r10.kicad_pcb`
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/kicad/teensy-41-true-dual-canfd-lin-r10.kicad_pro`
+JLCPCB / PCBWay upload ZIP:
 
-There is currently no authoritative `.kicad_sch`; therefore there is no meaningful ERC and no schematic-driven BOM/netlist authority.
+- `revisions/00_WORK_R11_TRUE_DUAL_CANFD/release/R11_PROTOTYPE_MANUFACTURING_CANDIDATE_20260630/package/JLCPCB_PCBWAY_UPLOAD_R11_MINIMAL_GERBERS_ONLY_20260630.zip`
 
-## R10 verification
+Full release ZIP:
 
-KiCad CLI DRC was run from the cleaned active revision folder.
+- `revisions/00_WORK_R11_TRUE_DUAL_CANFD/release/R11_PROTOTYPE_MANUFACTURING_CANDIDATE_20260630/package/R11_PROTOTYPE_MANUFACTURING_CANDIDATE_20260630_FULL_RELEASE.zip`
 
-Report:
+## R11 verification
 
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/reports/R10_TRUE_DUAL_CANFD_DRC_RECHECK.rpt`
+KiCad CLI DRC was run against the active board and the clean release-copy board.
+
+Reports:
+
+- `revisions/00_WORK_R11_TRUE_DUAL_CANFD/release/R11_PROTOTYPE_MANUFACTURING_CANDIDATE_20260630/reports/R11_PROTOTYPE_CANDIDATE_DRC.rpt`
+- `revisions/00_WORK_R11_TRUE_DUAL_CANFD/release/R11_PROTOTYPE_MANUFACTURING_CANDIDATE_20260630/reports/R11_PROTOTYPE_CANDIDATE_CLEAN_RELEASE_COPY_DRC.rpt`
 
 Result:
 
 - DRC violations: 0
-- Unconnected pads/items: 0
+- Known residual: 1 GND F.Cu/B.Cu zone-to-zone unconnected report at 1.0000 mm / 1.0000 mm
 - Footprint errors: 0
+- Gerber/drill export: successful
+- GND continuity: visually confirmed in KiCad after zone refill/highlight
 
-This is a geometry/routing check only. It does not override the external review blockers.
+The residual GND item is treated as a reviewed KiCad zone-report artifact for prototype PCB ordering, not as approval for vehicle use.
 
-## R10 blockers
+## R11 prototype ordering guidance
 
-See:
+Order only a small bare-PCB batch first:
 
-- `revisions/00_ACTIVE_R10_TRUE_DUAL_CANFD/docs/R10_EXTERNAL_REVIEW_FINDINGS_20260630.md`
+- 2 layers
+- FR-4
+- 1.6 mm
+- 1 oz copper
+- 5 pieces or smallest economical batch
+- electrical test enabled
+- no assembly for first order
 
-Minimum R10A/R11 work:
+Before vehicle testing:
 
-1. Create real `.kicad_sch` and run ERC.
-2. Fix TLIN1029 VSUP decoupling.
-3. Add LIN commander pull-up option.
-4. Add LIN_EN pull-down.
-5. Add CAN STBY/XSTBY pull-ups.
-6. Add MCP2518FD nCS pull-ups.
-7. Connect LM2596 thermal tab to GND.
-8. Redo buck/power routing and add GND pours.
-9. Move decoupling capacitors local to ICs.
-10. Move MCP2518FD crystals/load caps close to controllers and finalize load capacitance.
-11. Add CAN/LIN/K ESD protection.
-12. Resolve USB/VIN isolation.
-13. Improve DIP-switch safety/truth-table documentation.
-14. Regenerate BOM, ERC, DRC, Gerbers, drill files, and final package.
+1. Inspect bare PCBs.
+2. Check GND continuity and rail shorts with a multimeter.
+3. Assemble power section first.
+4. Power from a current-limited bench supply.
+5. Verify OBD/pigtail pin mapping with a multimeter.
+6. Verify DIP switch safe/default positions.
+7. Test CAN/LIN/K behavior on bench hardware before a fused OBD vehicle connection.
 
-## R9 status
+## R10/R9 status
 
-R9 is archived here:
-
-- `revisions/01_R9_CLASSIC_CAN_ARCHIVE/`
-
-R9 remains historical/reference material only and should not be presented as true dual CAN FD.
+R10 remains archived as `NOT FOR FAB` after external review. R9 remains historical/reference material only and is not true dual CAN FD.

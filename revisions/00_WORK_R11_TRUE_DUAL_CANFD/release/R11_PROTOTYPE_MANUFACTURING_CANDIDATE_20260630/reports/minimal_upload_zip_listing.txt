@@ -1,0 +1,14 @@
+Archive:  /home/kali/teensy-r9-publish/revisions/00_WORK_R11_TRUE_DUAL_CANFD/release/R11_PROTOTYPE_MANUFACTURING_CANDIDATE_20260630/package/JLCPCB_PCBWAY_UPLOAD_R11_MINIMAL_GERBERS_ONLY_20260630.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+   331847  2026-06-30 16:31   teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH-F_Cu.gtl
+   207463  2026-06-30 16:31   teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH-B_Cu.gbl
+     6726  2026-06-30 16:31   teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH-F_Mask.gts
+     4547  2026-06-30 16:31   teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH-B_Mask.gbs
+   138018  2026-06-30 16:31   teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH-F_Silkscreen.gto
+    11956  2026-06-30 16:31   teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH-B_Silkscreen.gbo
+      696  2026-06-30 16:31   teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH-Edge_Cuts.gm1
+     3138  2026-06-30 16:31   teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH.drl
+     5463  2026-06-30 16:31   teensy-41-true-dual-canfd-lin-r11_JARVIS_ROUTED_CLEAN_V2_GND_STITCH-job.gbrjob
+---------                     -------
+   709854                     9 files

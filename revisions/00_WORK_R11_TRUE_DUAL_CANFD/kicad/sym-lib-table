@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "teensy-r10-canfd") (type "KiCad") (uri "${KIPRJMOD}/teensy-r10-canfd.kicad_sym") (options "") (descr "R10 local symbols including MCP2518FD placeholder pending datasheet pinout verification"))
+)
